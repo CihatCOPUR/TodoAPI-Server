@@ -5,56 +5,40 @@
 
 require("express-async-errors")
 
-const { todoPost}=require("../models/todoModel");
+const { todo}=require("../models/todoModel");
 
 
-module.exports.todoPost={
+module.exports.todo={
 
     list: async(req,res)=>{
-        const data=await todoPost.find()
+        const data=await todo.find()
         res.status(200).send({
             error:false,
             data:data
-
         })
-
     },
     create: async(req,res)=>{
-        
-
-        const data=await todoPost.create(req.body)
+        const data=await todo.create(req.body)
         res.status(201).send({
             error:false,
             body:req.body,
             data:data
-
         })
-
-    },
-    read: async(req,res)=>{
-        const data=await todoPost.find({_id:req.params.postId})
-        res.status(202).send({
-            error:false,
-            data:data 
-
-        })
-
     },
     update: async(req,res)=>{
-        const data=await todoPost.updateOne({_id:req.params.postId},req.body)
-        const newdata=await todoPost.find({_id:req.params.postId})
+        console.log(req.params)
+        const data=await todo.updateOne({_id:req.params.id},req.body)
+        const newdata=await todo.find({_id:req.params.id})
         res.status(202).send({
             error:false,
             body:req.body,
             data:data, // info about update
             // güncel veriyi istiyorsan tekrar çağır
             newdata:newdata
-
         })
-
     },
     delete: async(req,res)=>{
-        const data=await todoPost.deleteOne({_id:req.params.postId})
+        const data=await todo.deleteOne({_id:req.params.id})
         // console.log(data);
         res.sendStatus((data.deletedCount>=1)? 204:404)
         

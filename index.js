@@ -22,7 +22,7 @@ require('./src/dbConnection') // dotenv çalıştıktan sonra
 
 
 // Route Connection
-app.use('/todo',require("./src/routers/todoRouter"))
+app.use('/',require("./src/routers/todoRouter"))
 
 // errorHandler connection
 require('./src/errorHandler')
